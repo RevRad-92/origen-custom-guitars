@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 
@@ -58,9 +59,19 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Producto $producto)
+    public function edit($id)
     {
-        //
+        
+        $producto = Producto::find($id);
+        $categorias = Categoria::all();
+        
+
+        return view('modificarProducto', 
+                                        [ 
+                                            'producto'  => $producto,
+                                            'categorias' => $categorias
+                                        ]
+                        );
     }
 
     /**
