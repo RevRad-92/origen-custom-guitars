@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Madera extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'idMadera';
+    public $timestamps = false;
 }

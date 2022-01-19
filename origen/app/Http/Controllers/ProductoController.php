@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Madera;
+use App\Models\Modelo;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 
@@ -64,12 +66,16 @@ class ProductoController extends Controller
         
         $producto = Producto::find($id);
         $categorias = Categoria::all();
+        $modelos = Modelo::all();
+        $maderas = Madera::all();
         
 
         return view('modificarProducto', 
                                         [ 
                                             'producto'  => $producto,
-                                            'categorias' => $categorias
+                                            'categorias' => $categorias,
+                                            'modelos' => $modelos,
+                                            'maderas' => $maderas
                                         ]
                         );
     }
@@ -81,9 +87,52 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Producto $producto)
+    public function update(Request $request)
     {
-        //
+        // validar
+        $this->validarFrom($request);
+
+        // obtener producto
+        $Producto = Producto::find($request->idProducto);
+        
+        // modificar atributos
+        $Producto->idCategoria = $request->idCategoria;
+        $Producto->idModelo = $request->idModelo;
+        $Producto->idMadera = $request->idMadera;
+        $Producto->prdStock = $request->prdStock;
+        $Producto->prdPrecio = $request->prdPrecio;
+        $Producto->prdDetalles = $request->prdDetalles;
+
+        
+        // guardar
+        $Producto->save();
+        
+        //redireccionar
+        return redirect('/adminProductos')
+                        ->with(['mensaje' => 'Producto modificado con éxito']);
+    }
+
+    public function validarFrom(Request $request) 
+    {
+        $request->validate(
+            [
+                'idCategoria' => 'required',
+                'idModelo' => 'required',
+                'idMadera' => 'required',
+                'prdStock' => 'required|integer|min:0',
+                'prdPrecio' => 'numeric|min:0',
+            ], 
+            [
+                'idCategoria.required' => 'El producto debe tener una categoría',
+                'idModelo.required' => 'El producto debe tener un modelo',
+                'idMadera.required' => 'El producto debe tener una madera asignada',
+                'prdStock.required' => 'El producto debe tener un stock asignado',
+                'prdStock.integer' => 'El producto debe tener un stock numérico',
+                'prdStock.integer' => 'El stock del producto debe ser numérico',
+                'prdPrecio.numeric' => 'El precio del producto debe ser numérico',
+                'prdPrecio.min' => 'El precio del producto debe ser numérico',
+            ]
+        );
     }
 
     /**

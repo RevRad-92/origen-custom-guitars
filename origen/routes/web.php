@@ -28,4 +28,5 @@ require __DIR__.'/auth.php';
 ## CRUD ##
 ## PRODUCTOS ##
 Route::get('/adminProductos', [ProductoController::class, 'index'])->middleware(['auth'])->name('adminProductos');
-Route::get('/modificarProducto/{id}', [ProductoController::class, 'edit'])->middleware(['auth'])->name('modificarProductos');
+Route::get('/modificarProducto/{id}', [ProductoController::class, 'edit'])->middleware(['auth'])->name('modificarProducto');
+Route::put('/modificarProducto', [ProductoController::class, 'update'])->middleware(['auth'])->name('modificarProducto');
