@@ -7,3 +7,4 @@ Este proyecto se desarrolla con:
 * Laravel/PHP
 * JavaScript
 * HTML/CSS
+* MariaDB
