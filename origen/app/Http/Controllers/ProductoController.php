@@ -30,7 +30,16 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        //
+        $categorias = Categoria::all();
+        $modelos = Modelo::all();
+        $maderas = Madera::all();
+
+        return view('agregarProducto', 
+                            [
+                                'categorias' => $categorias,
+                                'modelos' => $modelos,
+                                'maderas' => $maderas
+                            ]);
     }
 
     /**
@@ -41,7 +50,22 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validarForm($request);
+
+        $Producto = new Producto();
+
+        $Producto->idCategoria = $request->idCategoria;
+        $Producto->idModelo = $request->idModelo;
+        $Producto->idMadera = $request->idMadera;
+        $Producto->prdStock = $request->prdStock;
+        $Producto->prdPrecio = $request->prdPrecio;
+        $Producto->prdDetalles = $request->prdDetalles;
+
+        $Producto->save();
+
+        return redirect('adminProductos')
+                    ->with([ 'mensaje' => 'Producto agregado correctamente' ]);
+        
     }
 
     /**
@@ -90,7 +114,7 @@ class ProductoController extends Controller
     public function update(Request $request)
     {
         // validar
-        $this->validarFrom($request);
+        $this->validarForm($request);
 
         // obtener producto
         $Producto = Producto::find($request->idProducto);
@@ -103,7 +127,6 @@ class ProductoController extends Controller
         $Producto->prdPrecio = $request->prdPrecio;
         $Producto->prdDetalles = $request->prdDetalles;
 
-        
         // guardar
         $Producto->save();
         
@@ -112,7 +135,7 @@ class ProductoController extends Controller
                         ->with(['mensaje' => 'Producto modificado con éxito']);
     }
 
-    public function validarFrom(Request $request) 
+    public function validarForm(Request $request) 
     {
         $request->validate(
             [
@@ -130,7 +153,7 @@ class ProductoController extends Controller
                 'prdStock.integer' => 'El producto debe tener un stock numérico',
                 'prdStock.integer' => 'El stock del producto debe ser numérico',
                 'prdPrecio.numeric' => 'El precio del producto debe ser numérico',
-                'prdPrecio.min' => 'El precio del producto debe ser numérico',
+                'prdPrecio.min' => 'El precio del producto debe ser mayor a cero',
             ]
         );
     }
