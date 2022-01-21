@@ -135,7 +135,11 @@ class ProductoController extends Controller
                         ->with(['mensaje' => 'Producto modificado con éxito']);
     }
 
-    public function validarForm(Request $request) 
+    /**
+     * Método para validar formulario
+     * @param Request $request
+     */
+    private function validarForm(Request $request) 
     {
         $request->validate(
             [
