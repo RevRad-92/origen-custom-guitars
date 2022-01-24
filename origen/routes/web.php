@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ModeloController;
 use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,13 +31,13 @@ require __DIR__.'/auth.php';
 ## PRODUCTOS ##
 Route::get('/adminProductos', [ProductoController::class, 'index'])->middleware(['auth'])->name('adminProductos');
 
-// modificar
-Route::get('/modificarProducto/{id}', [ProductoController::class, 'edit'])->middleware(['auth'])->name('modificarProducto');
-Route::put('/modificarProducto', [ProductoController::class, 'update'])->middleware(['auth'])->name('modificarProducto');
-
 // agregar
 Route::get('/agregarProducto', [ProductoController::class, 'create'])->middleware(['auth'])->name('agregarProducto');
 Route::post('/agregarProducto', [ProductoController::class, 'store'])->middleware(['auth'])->name('agregarProducto');
+
+// modificar
+Route::get('/modificarProducto/{id}', [ProductoController::class, 'edit'])->middleware(['auth'])->name('modificarProducto');
+Route::put('/modificarProducto', [ProductoController::class, 'update'])->middleware(['auth'])->name('modificarProducto');
 
 // eliminar
 
@@ -44,11 +45,24 @@ Route::post('/agregarProducto', [ProductoController::class, 'store'])->middlewar
 ## CATEGORÍAS ##
 Route::get('/adminCategorias', [CategoriaController::class, 'index'])->middleware(['auth'])->name('adminCategorias');
 
+// agregar 
+Route::get('/agregarCategoria', [CategoriaController::class, 'create'])->middleware(['auth'])->name('agregarCategoria');
+Route::post('/agregarCategoria', [CategoriaController::class, 'store'])->middleware(['auth'])->name('agregarCategoria');
+
 // modificar
 Route::get('/modificarCategoria/{id}', [CategoriaController::class, 'edit'])->middleware(['auth'])->name('modificarCategoria');
 Route::put('/modificarCategoria', [CategoriaController::class, 'update'])->middleware(['auth'])->name('modificarCategoria');
 
+// eliminar
 
-// agregar 
-Route::get('/agregarCategoria', [CategoriaController::class, 'create'])->middleware(['auth'])->name('agregarCategoria');
-Route::post('/agregarCategoria', [CategoriaController::class, 'store'])->middleware(['auth'])->name('agregarCategoria');
+
+## MODELOS ##
+Route::get('/adminModelos', [ModeloController::class, 'index'])->middleware(['auth'])->name('adminModelos');
+
+// agregar
+Route::get('/agregarModelo', [ModeloController::class, 'create'])->middleware(['auth'])->name('agregarModelo');
+Route::post('/agregarModelo', [ModeloController::class, 'store'])->middleware(['auth'])->name('agregarModelo');
+
+// modificar 
+Route::get('/modificarModelo/{id}', [ModeloController::class, 'edit'])->middleware(['auth'])->name('modificarModelo');
+Route::put('/modificarModelo', [ModeloController::class, 'update'])->middleware(['auth'])->name('modificarModelo');

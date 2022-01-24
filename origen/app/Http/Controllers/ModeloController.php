@@ -14,7 +14,9 @@ class ModeloController extends Controller
      */
     public function index()
     {
-        //
+        $modelos = Modelo::paginate(5);
+        
+        return view('adminModelos', [ 'modelos' => $modelos ]);
     }
 
     /**
@@ -24,7 +26,7 @@ class ModeloController extends Controller
      */
     public function create()
     {
-        //
+        return view('/agregarModelo');
     }
 
     /**
@@ -35,7 +37,15 @@ class ModeloController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validarForm($request);
+
+        $Modelo = new Modelo();
+
+        $Modelo->modNombre = $modNombre = $request->modNombre;
+
+        $Modelo->save();
+
+        return redirect('adminModelos')->with([ 'mensaje' => 'El nuevo modelo ' . $modNombre . ' ha sido agregado con éxito']);
     }
 
     /**
@@ -55,9 +65,11 @@ class ModeloController extends Controller
      * @param  \App\Models\Modelo  $modelo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Modelo $modelo)
+    public function edit($id)
     {
-        //
+        $Modelo = Modelo::find($id);
+
+        return view('modificarModelo', [ 'Modelo' => $Modelo ]);
     }
 
     /**
@@ -67,9 +79,33 @@ class ModeloController extends Controller
      * @param  \App\Models\Modelo  $modelo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Modelo $modelo)
+    public function update(Request $request)
     {
-        //
+        $this->validarForm($request);
+
+        $Modelo = Modelo::find($request->idModelo);
+
+        $Modelo->idModelo = $request->idModelo;
+        $Modelo->modNombre = $modNombre = $request->modNombre;
+
+        $Modelo->save();
+
+        return redirect('adminModelos')->with([ 'mensaje' => 'El modelo ' . $modNombre . ' se ha actualizado con éxito' ]);
+    }
+
+    private function validarForm(Request $request) 
+    {
+        $request->validate(
+            [
+                'modNombre' => 'required|min: 2|max: 50'
+            ],
+            [
+                'modNombre.required' => 'El modelo debe tener un nombre',
+                'modNombre.min' => 'El modelo debe tener al menos dos caracteres de largo',
+                'modNombre.max' => 'El modelo debe tener como máximo 50 caracteres de largo',
+
+            ]
+        );
     }
 
     /**
