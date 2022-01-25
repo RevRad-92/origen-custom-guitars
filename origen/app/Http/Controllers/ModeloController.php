@@ -93,6 +93,11 @@ class ModeloController extends Controller
         return redirect('adminModelos')->with([ 'mensaje' => 'El modelo ' . $modNombre . ' se ha actualizado con éxito' ]);
     }
 
+
+    /**
+     * Método para validar formulario
+     * @param Request $request
+     */
     private function validarForm(Request $request) 
     {
         $request->validate(

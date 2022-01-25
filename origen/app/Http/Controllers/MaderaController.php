@@ -14,7 +14,9 @@ class MaderaController extends Controller
      */
     public function index()
     {
-        //
+        $maderas = Madera::paginate(5);
+
+        return view('adminMaderas', [ 'maderas' => $maderas]);
     }
 
     /**
@@ -23,8 +25,8 @@ class MaderaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   
+        return view('agregarMadera');
     }
 
     /**
@@ -35,7 +37,16 @@ class MaderaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validarForm($request);
+
+        $Madera = new Madera();
+
+        $Madera->idMadera = $request->idMadera;
+        $Madera->madNombre = $madNombre = $request->madNombre;
+
+        $Madera->save();
+
+        return redirect('adminMaderas',  [ 'mensaje' => 'La madera ' . $madNombre . ' fue creada exitosamente']);
     }
 
     /**
@@ -55,9 +66,11 @@ class MaderaController extends Controller
      * @param  \App\Models\Madera  $madera
      * @return \Illuminate\Http\Response
      */
-    public function edit(Madera $madera)
+    public function edit($id)
     {
-        //
+        $Madera = Madera::find($id);
+
+        return view('modificarMadera', [ 'Madera' => $Madera ]);
     }
 
     /**
@@ -69,7 +82,30 @@ class MaderaController extends Controller
      */
     public function update(Request $request, Madera $madera)
     {
-        //
+        $this->validarForm($request);
+        $Madera = Madera::find($request->idMadera);
+        $Madera->idMadera = $request->idMadera;
+        $Madera->madNombre = $madNombre = $request->madNombre;
+        $Madera->save();
+        return redirect('adminMaderas')->with([ 'mensaje' => 'La madera ha sido actualizada']);
+    }
+
+    /**
+     * Método para validar formulario
+     * @param Request $request
+     */
+    private function validarForm(Request $request)
+    {
+        $request->validate(
+            [
+                'madNombre' => 'required|min: 2|max: 50'
+            ],
+            [
+                'madNombre.required' => 'El nombre de la madera es obligatorio',
+                'madNombre.min' => 'El nombre de la madera debe contener al menos 2 caracteres',
+                'madNombre.max' => 'El nombre de la madera debe contener como máximo 50 caracteres'
+            ]
+        );
     }
 
     /**

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Agregar modelo
+            Agregar madera
         </h2>
     </x-slot>
 
@@ -11,17 +11,17 @@
                 <div class="alert bg-light border border-white shadow round col-8 mx-auto p-4"> 
                     {{-- class="p-6 bg-white border-b border-gray-200" --}}
                     
-                    <form action="/agregarModelo" method="post" class="form-control">
+                    <form action="/agregarMadera" method="post" class="form-control">
                     @csrf
                     
-                    Nombre del modelo: 
-                    <br> 
-                    <input type="text" name ="modNombre" value="{{ old('modNombre') }}" class="form-control">
-                    
-                    <br>
-                
-                    <button class="btn btn-dark mb-3">Agregar Modelo</button>
-                    <a href="/adminModelos" class="btn btn-outline-secondary mb-3">Volver al panel de modelos</a>
+                        Nombre de la madera: 
+                            <br> 
+                            <input type="text" name ="madNombre" value="{{ old('madNombre') }}" class="form-control">
+                            
+                            <br>
+                        
+                        <button class="btn btn-dark mb-3">Agregar Madera</button>
+                        <a href="/adminMaderas" class="btn btn-outline-secondary mb-3">Volver al panel de maderas</a>
                     </form>
 
                     @include('layouts.msgErrorValidate')

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Modificar modelo: {{ $Modelo->modNombre }}
+            Modificar madera: {{ $Madera->madNombre }}
         </h2>
     </x-slot>
 
@@ -11,20 +11,20 @@
                 <div class="alert bg-light border border-white shadow round col-8 mx-auto p-4"> 
                     {{-- class="p-6 bg-white border-b border-gray-200" --}}
                     
-                    <form action="/modificarModelo" method="post" class="form-control">
+                    <form action="/modificarMadera" method="post" class="form-control">
                     @csrf
                     @method('put')
                     
-                        Nombre del modelo: 
+                        Nombre de la madera: 
                             <br> 
-                            <input type="text" name ="modNombre" value="{{ old('modNombre', $Modelo->modNombre) }}" class="form-control">
+                            <input type="text" name ="madNombre" value="{{ old('madNombre', $Madera->madNombre) }}" class="form-control">
                             
                             <br>
 
-                            <input type="hidden" name="idModelo" value="{{ $Modelo->idModelo }}">
+                            <input type="hidden" name="idMadera" value="{{ $Madera->idMadera }}">
                         
-                        <button class="btn btn-dark mb-3">Modificar Modelo</button>
-                        <a href="/adminModelos" class="btn btn-outline-secondary mb-3">Volver al panel de modelos</a>
+                        <button class="btn btn-dark mb-3">Modificar Madera</button>
+                        <a href="/modificarMadera" class="btn btn-outline-secondary mb-3">Volver al panel de maderas</a>
                     </form>
 
                     @include('layouts.msgErrorValidate')

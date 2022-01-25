@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\MaderaController;
 use App\Http\Controllers\ModeloController;
 use App\Http\Controllers\ProductoController;
+use App\Models\Madera;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,6 +58,7 @@ Route::put('/modificarCategoria', [CategoriaController::class, 'update'])->middl
 // eliminar
 
 
+
 ## MODELOS ##
 Route::get('/adminModelos', [ModeloController::class, 'index'])->middleware(['auth'])->name('adminModelos');
 
@@ -66,3 +69,22 @@ Route::post('/agregarModelo', [ModeloController::class, 'store'])->middleware(['
 // modificar 
 Route::get('/modificarModelo/{id}', [ModeloController::class, 'edit'])->middleware(['auth'])->name('modificarModelo');
 Route::put('/modificarModelo', [ModeloController::class, 'update'])->middleware(['auth'])->name('modificarModelo');
+
+// eliminar
+
+
+
+## MADERAS ##
+Route::get('/adminMaderas', [MaderaController::class, 'index'])->middleware(['auth'])->name('adminMaderas');
+
+// agregar 
+Route::get('/agregarMadera', [MaderaController::class, 'create'])->middleware(['auth'])->name('agregarMadera');
+Route::post('/agregarMadera', [MaderaController::class, 'store'])->middleware(['auth'])->name('agregarMadera');
+
+// modificar
+Route::get('modificarMadera/{id}', [MaderaController::class, 'edit'])->middleware(['auth'])->name('modificarMadera');
+Route::put('modificarMadera', [MaderaController::class, 'update'])->middleware(['auth'])->name('modificarMadera');
+
+// eliminar
+
+
