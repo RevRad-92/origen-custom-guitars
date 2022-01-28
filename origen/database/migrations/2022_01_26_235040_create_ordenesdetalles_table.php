@@ -19,7 +19,7 @@ class CreateOrdenesdetallesTable extends Migration
             $table->tinyInteger('idProducto');
             $table->Integer('prdCantidad');
             $table->tinyInteger('idEstado');
-            $table->text('odDetalles');
+            $table->text('odDetalles')->nullable(true);
 
             $table->foreign('idOrden')
                     ->references('idOrden')->on('ordenes');

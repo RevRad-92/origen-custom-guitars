@@ -16,7 +16,7 @@ class CreateMaderasTable extends Migration
         Schema::create('maderas', function (Blueprint $table) {
             $table->tinyIncrements('idMadera');
             $table->string('madNombre');
-            $table->integer('madStock');
+            $table->integer('madStock')->nullable(true);
         });
     }
 

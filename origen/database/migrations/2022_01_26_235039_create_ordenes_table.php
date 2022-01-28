@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrdenesCreate extends Migration
+class CreateOrdenesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateOrdenesCreate extends Migration
      */
     public function up()
     {
-        Schema::create('ordenes_create', function (Blueprint $table) {
+        Schema::create('ordenes', function (Blueprint $table) {
             $table->tinyIncrements('idOrden');
             $table->tinyInteger('idCliente');
             $table->tinyInteger('idFormaPago');
             $table->tinyInteger('idEstado');
             $table->date('ordFecha'); // date('l jS \of F Y h:i:s A') = Monday 8th of August 2005 03:12:46 PM
-            $table->text('ordComentarios');
+            $table->text('ordComentarios')->nullable(true);
 
             $table->foreign('idCliente')
                     ->references('idCliente')->on('clientes');

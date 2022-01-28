@@ -14,20 +14,23 @@ class CreateProductosTable extends Migration
     public function up()
     {
         Schema::create('productos', function (Blueprint $table) {
-            $table->tinyIncrements('idProducto');
+            $table->tinyIncrements('idProducto'); 
             $table->tinyInteger('idCategoria');
-            $table->float('prdPrecio', 10, 2)->unsigned();
-            $table->integer('prdStock');
+            $table->float('prdPrecio', 10, 2)->unsigned()->nullable(true);
+            $table->integer('prdStock')->nullable(true);
             $table->tinyInteger('idModelo');
             $table->tinyInteger('idMadera');
-            $table->string('prdImagen');
+            $table->string('prdImagen')->nullable(true);
+            $table->string('prdCustonMod')->nullable(true);
+            $table->string('prdCustonMad')->nullable(true);
+            $table->text('prdDetalle')->nullable(true);
 
             $table->foreign('idCategoria')
                     ->references('idCategoria')->on('categorias');
             $table->foreign('idModelo')
                     ->references('idModelo')->on('modelos');
             $table->foreign('idMadera')
-                    ->refereces('idMadera')->on('maderas');
+                    ->references('idMadera')->on('maderas');
         });
     }
 
