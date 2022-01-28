@@ -14,8 +14,8 @@ class CreatePagosTable extends Migration
     public function up()
     {
         Schema::create('pagos', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->tinyIncrements('idFormaPago');
+            $table->string('formaPago');
         });
     }
 

@@ -14,8 +14,19 @@ class CreateOrdenesdetallesTable extends Migration
     public function up()
     {
         Schema::create('ordenesdetalles', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->tinyIncrements('idDetalle');
+            $table->tinyInteger('idOrden');
+            $table->tinyInteger('idProducto');
+            $table->Integer('prdCantidad');
+            $table->tinyInteger('idEstado');
+            $table->text('odDetalles');
+
+            $table->foreign('idOrden')
+                    ->references('idOrden')->on('ordenes');
+            $table->foreign('idProducto')
+                    ->references('idProducto')->on('productos');
+            $table->foreign('idEstado')
+                    ->references('idEstado')->on('estados');        
         });
     }
 

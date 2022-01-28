@@ -14,8 +14,9 @@ class CreateMaderasTable extends Migration
     public function up()
     {
         Schema::create('maderas', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->tinyIncrements('idMadera');
+            $table->string('madNombre');
+            $table->integer('madStock');
         });
     }
 

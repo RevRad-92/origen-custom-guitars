@@ -14,8 +14,20 @@ class CreateOrdenesCreate extends Migration
     public function up()
     {
         Schema::create('ordenes_create', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->tinyIncrements('idOrden');
+            $table->tinyInteger('idCliente');
+            $table->tinyInteger('idFormaPago');
+            $table->tinyInteger('idEstado');
+            $table->date('ordFecha'); // date('l jS \of F Y h:i:s A') = Monday 8th of August 2005 03:12:46 PM
+            $table->text('ordComentarios');
+
+            $table->foreign('idCliente')
+                    ->references('idCliente')->on('clientes');
+            $table->foreign('idFormaPago')
+                    ->references('idFormaPago')->on('pagos');
+            $table->foreign('idEstado')
+                    ->references('idEstado')->on('estados');                    
+
         });
     }
 
