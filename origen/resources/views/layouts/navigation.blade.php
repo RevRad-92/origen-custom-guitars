@@ -21,6 +21,12 @@
                         Productos
                     </x-nav-link>
                 </div>
+                
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('adminVentas')" :active="request()->routeIs('adminVentas')">
+                        Ventas
+                    </x-nav-link>
+                </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('adminCategorias')" :active="request()->routeIs('adminCategorias')">
                         Categorías
@@ -34,6 +40,11 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('adminMaderas')" :active="request()->routeIs('adminMaderas')">
                         Maderas
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('adminClientes')" :active="request()->routeIs('adminClientes')">
+                        Mis Clientes
                     </x-nav-link>
                 </div>
             </div>

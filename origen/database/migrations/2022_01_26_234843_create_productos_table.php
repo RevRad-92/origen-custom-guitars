@@ -23,14 +23,14 @@ class CreateProductosTable extends Migration
             $table->string('prdImagen')->nullable(true);
             $table->string('prdCustonMod')->nullable(true);
             $table->string('prdCustonMad')->nullable(true);
-            $table->text('prdDetalle')->nullable(true);
+            $table->text('prdDetalles')->nullable(true);
 
-            $table->foreign('idCategoria')
-                    ->references('idCategoria')->on('categorias');
-            $table->foreign('idModelo')
-                    ->references('idModelo')->on('modelos');
-            $table->foreign('idMadera')
-                    ->references('idMadera')->on('maderas');
+            // $table->foreign('idCategoria')
+            //         ->references('idCategoria')->on('categorias');
+            // $table->foreign('idModelo')
+            //         ->references('idModelo')->on('modelos');
+            // $table->foreign('idMadera')
+            //         ->references('idMadera')->on('maderas');
         });
     }
 

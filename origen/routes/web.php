@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\MaderaController;
 use App\Http\Controllers\ModeloController;
+use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\ProductoController;
 use App\Models\Madera;
 use Illuminate\Support\Facades\Route;
@@ -82,9 +84,17 @@ Route::get('/agregarMadera', [MaderaController::class, 'create'])->middleware(['
 Route::post('/agregarMadera', [MaderaController::class, 'store'])->middleware(['auth'])->name('agregarMadera');
 
 // modificar
-Route::get('modificarMadera/{id}', [MaderaController::class, 'edit'])->middleware(['auth'])->name('modificarMadera');
-Route::put('modificarMadera', [MaderaController::class, 'update'])->middleware(['auth'])->name('modificarMadera');
+Route::get('/modificarMadera/{id}', [MaderaController::class, 'edit'])->middleware(['auth'])->name('modificarMadera');
+Route::put('/modificarMadera', [MaderaController::class, 'update'])->middleware(['auth'])->name('modificarMadera');
 
 // eliminar
+
+
+## CLIENTES ##
+Route::get('/adminClientes', [ClienteController::class, 'index'])->middleware(['auth'])->name('adminClientes');
+
+/* SOLO PARA DESARROLLO */
+## ORDENES ##
+Route::get('/adminVentas', [OrdenController::class, 'index'])->middleware(['auth'])->name('adminVentas');
 
 

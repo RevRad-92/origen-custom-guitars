@@ -21,12 +21,12 @@ class CreateOrdenesdetallesTable extends Migration
             $table->tinyInteger('idEstado');
             $table->text('odDetalles')->nullable(true);
 
-            $table->foreign('idOrden')
-                    ->references('idOrden')->on('ordenes');
-            $table->foreign('idProducto')
-                    ->references('idProducto')->on('productos');
-            $table->foreign('idEstado')
-                    ->references('idEstado')->on('estados');        
+            // $table->foreign('idOrden')
+            //         ->references('idOrden')->on('ordenes');
+            // $table->foreign('idProducto')
+            //         ->references('idProducto')->on('productos');
+            // $table->foreign('idEstado')
+            //         ->references('idEstado')->on('estados');        
         });
     }
 

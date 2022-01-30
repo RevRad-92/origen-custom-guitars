@@ -21,12 +21,12 @@ class CreateOrdenesTable extends Migration
             $table->date('ordFecha'); // date('l jS \of F Y h:i:s A') = Monday 8th of August 2005 03:12:46 PM
             $table->text('ordComentarios')->nullable(true);
 
-            $table->foreign('idCliente')
-                    ->references('idCliente')->on('clientes');
-            $table->foreign('idFormaPago')
-                    ->references('idFormaPago')->on('pagos');
-            $table->foreign('idEstado')
-                    ->references('idEstado')->on('estados');                    
+            // $table->foreign('idCliente')
+            //         ->references('idCliente')->on('clientes');
+            // $table->foreign('idFormaPago')
+            //         ->references('idFormaPago')->on('pagos');
+            // $table->foreign('idEstado')
+            //         ->references('idEstado')->on('estados');                    
 
         });
     }

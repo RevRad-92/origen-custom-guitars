@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Estado extends Model
+class Pago extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'idEstado';
+    protected $primaryKey = 'idFormaPago';
     public $timestamps = false;
 }
