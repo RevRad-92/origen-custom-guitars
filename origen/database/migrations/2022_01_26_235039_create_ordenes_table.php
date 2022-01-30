@@ -18,7 +18,7 @@ class CreateOrdenesTable extends Migration
             $table->tinyInteger('idCliente');
             $table->tinyInteger('idFormaPago');
             $table->tinyInteger('idEstado');
-            $table->date('ordFecha'); // date('l jS \of F Y h:i:s A') = Monday 8th of August 2005 03:12:46 PM
+            $table->dateTime('ordFecha'); // date('l jS \of F Y h:i:s A') = Monday 8th of August 2005 03:12:46 PM
             $table->text('ordComentarios')->nullable(true);
 
             // $table->foreign('idCliente')

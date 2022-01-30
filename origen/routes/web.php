@@ -97,4 +97,8 @@ Route::get('/adminClientes', [ClienteController::class, 'index'])->middleware(['
 ## ORDENES ##
 Route::get('/adminVentas', [OrdenController::class, 'index'])->middleware(['auth'])->name('adminVentas');
 
+// generar orden de compra
+Route::get('/generarOrden', [OrdenController::class, 'create'])->middleware(['auth'])->name('generarOrden');
+Route::post('/generarOrden', [OrdenController::class, 'store'])->middleware(['auth'])->name('generarOrden');
+
 

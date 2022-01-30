@@ -10,4 +10,5 @@ class Pago extends Model
     use HasFactory;
     protected $primaryKey = 'idFormaPago';
     public $timestamps = false;
+    
 }

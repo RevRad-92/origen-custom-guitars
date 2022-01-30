@@ -19,7 +19,10 @@ class DatabaseSeeder extends Seeder
             CategoriaSeeder::class,
             MaderaSeeder::class,
             ModeloSeeder::class,
-            ClienteSeeder::class
+            ClienteSeeder::class,
+            EstadoSeeder::class,
+            PagoSeeder::class
+            
         ]);
     }
 }

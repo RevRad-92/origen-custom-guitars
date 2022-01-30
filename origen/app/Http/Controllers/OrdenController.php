@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Orden;
+use App\Models\Pago;
 use Illuminate\Http\Request;
 
 class OrdenController extends Controller
@@ -15,7 +16,7 @@ class OrdenController extends Controller
     public function index()
     {
         $ordenes = Orden::with(['getCliente', 'getFormaPago', 'getEstado'])->paginate(10);
-
+        // dd($ordenes);
         return view('adminVentas', ['ordenes'=>$ordenes]);
     }
 
@@ -26,7 +27,9 @@ class OrdenController extends Controller
      */
     public function create()
     {
-        //
+        $pagos = Pago::all();
+
+        return view('generarOrden', [ 'pagos'=>$pagos ]);
     }
 
     /**
@@ -37,7 +40,21 @@ class OrdenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //falta validar, porque es para desarrollo
+        $orden = new Orden();
+
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
+        $date = date('Y-m-d H:i:s');
+
+        $orden->idFormaPago = $request->idFormaPago;
+        $orden->ordComentarios = $request->ordComentarios;
+        $orden->idCliente = $request->idCliente;
+        $orden->ordFecha = $date;
+        $orden->idEstado = $request->idEstado;
+
+        $orden->save();
+
+        return redirect('adminVentas')->with(['mensaje' => 'Orden de compra generada!']);
     }
 
     /**
