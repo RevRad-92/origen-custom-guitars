@@ -14,9 +14,36 @@
                     <form action="/generarOrden" method="post" class="form-control">
                     @csrf
 
+                        <input type="hidden" name="idOrden"> 
                         <input type="hidden" name="idCliente" value=1> 
                         
                         <input type="hidden" name="idEstado" value=1>
+
+                        Elegir características del cuerpo: 
+                        
+                        
+                
+                        <br>
+                        Seleccionar modelo: 
+                        <br> 
+                        <select name="idModelo" class="form-control desplegarModelo">
+                        <option value="">-- Seleccionar modelo --</option>
+                @foreach ($modelos as $modelo)        
+                        <option {{ (old('idModelo') == $modelo->idModelo) ? 'selected' : '' }} value="{{ $modelo->idModelo }}">{{ $modelo->modNombre }}</option>
+                @endforeach
+                    </select>
+                    
+                        Seleccionar madera: 
+                        <br> 
+                        <select name="idMadera" class="form-control desplegarMadera">
+                        <option value="">-- Seleccionar madera --</option>
+                @foreach ($maderas as $madera)        
+                        <option {{ (old('idMadera') == $madera->idMadera) ? 'selected' : '' }} value="{{ $madera->idMadera }}">{{  $madera->madNombre }}</option>
+                @endforeach
+                        </select>
+
+
+
                         Forma de Pago:
                         <br>
                         <select name="idFormaPago" class="form-control">
