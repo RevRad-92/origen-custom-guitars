@@ -6,6 +6,7 @@ use App\Http\Controllers\MaderaController;
 use App\Http\Controllers\ModeloController;
 use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\OrdenesdetalleController;
 use App\Models\Madera;
 use Illuminate\Support\Facades\Route;
 

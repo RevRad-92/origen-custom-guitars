@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Modelo;
 use App\Models\Madera;
 use App\Models\Orden;
-use App\Models\Ordenesdetalle;
 use App\Models\Pago;
 use Illuminate\Http\Request;
 
@@ -42,6 +41,8 @@ class OrdenController extends Controller
                     ]);
     }
 
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -56,20 +57,15 @@ class OrdenController extends Controller
         date_default_timezone_set('America/Argentina/Buenos_Aires');
         $date = date('Y-m-d H:i:s');
 
-        $orden->idOrden = $idOrden = $request->idOrden;
-        $orden->idFormaPago = $idFormaPago = $request->idFormaPago;
-        $orden->ordComentarios = $ordComentarios = $request->ordComentarios;
-        $orden->idCliente = $idCliente = $request->idCliente;
+        $orden->idFormaPago = $request->idFormaPago;
+        $orden->ordComentarios = $request->ordComentarios;
+        $orden->idCliente = $request->idCliente;
         $orden->ordFecha = $date;
-        $orden->idEstado = $idEstado = $request->idEstado;
+        $orden->idEstado = $request->idEstado;
         
-
         $orden->save();
 
-        // crear DETALLE de Orden: TRAITS ? 
-        
-
-        return redirect('adminVentas')->with(['mensaje' => 'Orden de compra generada' . '' . '!']);
+        return redirect('adminVentas')->with([ 'mensaje' => 'Orden de compra generada correctamente']);
     }
 
     /**

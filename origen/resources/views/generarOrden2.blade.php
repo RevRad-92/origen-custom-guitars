@@ -11,7 +11,7 @@
                 <div class="alert bg-light border border-white shadow round col-8 mx-auto p-4"> 
                     {{-- class="p-6 bg-white border-b border-gray-200" --}}
                     
-                    <form action="/generarOrden" method="post" class="form-control">
+                    <form action="/generarOrden2" method="post" class="form-control">
                     @csrf
 
                         <input type="hidden" name="idOrden"> 
@@ -19,7 +19,7 @@
                         
                         <input type="hidden" name="idEstado" value=1>
 
-                        <h1><b>Elegir características del cuerpo: </b></h1>
+                        <h1><b>Elegir características del mastil: </b></h1>
                         
                         
                 
@@ -44,22 +44,10 @@
 
 
 
-                        Forma de Pago:
-                        <br>
-                        <select name="idFormaPago" class="form-control">
-                        <option value="">-- Seleccionar forma de pago--</option>
-                    @foreach ($pagos as $pago)
-                        <option {{ (old('idFormaPago') == $pago->idFormaPago) ? 'selected' : '' }} value="{{ $pago->idFormaPago }}">{{ $pago->formaPago }}</option> 
-                    @endforeach
-                        </select>        
-                        <br> 
-                        Comentarios:
-                        <textarea name="ordComentarios" class="form-control">{{ old('ordComentarios') }}</textarea>
-                            
-                        <br>
+                        
                         
                         <button class="btn btn-dark mb-3">Continuar</button>
-                        <a href="/generarOrden" class="btn btn-outline-secondary mb-3">Volver al panel de Mis Ventas</a>
+                        <a href="/generarOrden2" class="btn btn-outline-secondary mb-3">Volver al panel de Mis Ventas</a>
                     </form>
 
                     @include('layouts.msgErrorValidate')

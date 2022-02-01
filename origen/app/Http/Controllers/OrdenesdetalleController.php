@@ -24,7 +24,7 @@ class OrdenesdetalleController extends Controller
      */
     public function create()
     {
-        //
+        //        
     }
 
     /**
