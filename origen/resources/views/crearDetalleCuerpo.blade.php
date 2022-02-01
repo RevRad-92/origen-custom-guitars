@@ -1,9 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Realizar Orden de compra *DESARROLLO*
+            Detalle de cuerpo *DESARROLLO*
         </h2>
     </x-slot>
+
+    @if ( session('mensaje') )
+            <div class="alert alert-success max-w-7xl mx-auto sm:px-6 lg:px-8">
+                {{ session('mensaje') }}
+            </div>
+    @endif
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -11,19 +17,20 @@
                 <div class="alert bg-light border border-white shadow round col-8 mx-auto p-4"> 
                     {{-- class="p-6 bg-white border-b border-gray-200" --}}
                     
-                    <form action="/generarOrden" method="post" class="form-control">
+                    <form action="/crearDetalleCuerpo" method="post" class="form-control">
                     @csrf
 
-                        <input type="hidden" name="idOrden"> 
+                        {{-- <input type="hidden" name="idOrden"> 
                         <input type="hidden" name="idCliente" value=1> 
                         
-                        <input type="hidden" name="idEstado" value=1>
+                        <input type="hidden" name="idEstado" value=1> --}}
 
-                        <h1><b>Iniciado Orden de compra (DESARROLLO) </b></h1>
+                        <h1><b>Generando detalle cuerpo guitarra (DESARROLLO) </b></h1>
                         
                         
-                
-                        {{-- <br>
+                        <input type="hidden" name="idOrden" value="{{ session('idOrden') }}">
+                        
+                        <br>
                         Seleccionar modelo: 
                         <br> 
                         <select name="idModelo" class="form-control desplegarModelo">
@@ -40,11 +47,11 @@
                 @foreach ($maderas as $madera)        
                         <option {{ (old('idMadera') == $madera->idMadera) ? 'selected' : '' }} value="{{ $madera->idMadera }}">{{  $madera->madNombre }}</option>
                 @endforeach
-                        </select> --}}
+                        </select>
 
 
 
-                        Forma de Pago:
+                        {{-- Forma de Pago:
                         <br>
                         <select name="idFormaPago" class="form-control">
                         <option value="">-- Seleccionar forma de pago--</option>
@@ -56,8 +63,8 @@
                         Comentarios:
                         <textarea name="ordComentarios" class="form-control">{{ old('ordComentarios') }}</textarea>
                             
+                         --}}
                         <br>
-                        
                         <button class="btn btn-dark mb-3">Iniciar Compra</button>
                         <a href="/adminVentas" class="btn btn-outline-secondary mb-3">Volver al panel de Mis Ventas</a>
                     </form>

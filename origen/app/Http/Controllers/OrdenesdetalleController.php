@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ordenesdetalle;
+use App\Models\Modelo;
+use App\Models\Madera;
+use App\Models\Orden;
 use Illuminate\Http\Request;
 
 class OrdenesdetalleController extends Controller
@@ -24,7 +27,15 @@ class OrdenesdetalleController extends Controller
      */
     public function create()
     {
-        //        
+        $modelos = Modelo::all();
+        $maderas = Madera::all();
+        
+        return view('crearDetalleCuerpo', [
+            'modelos' => $modelos,
+            'maderas' => $maderas,
+            
+            
+        ]);        
     }
 
     /**
@@ -35,7 +46,17 @@ class OrdenesdetalleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $detalleCuerpo = new Ordenesdetalle();
+
+
+        // $detalleCuerpo->idModelo = $request->idModelo;
+        // $detalleCuerpo->idMadera = $request->idMadera;
+
+        // CONSULTAR STOCK, RESTAR y GUARDAR ID de producto
+
+        $detalleCuerpo->save();
+
+        return redirect('adminVentas')->with(['mensaje' => 'detalle creado ok']);
     }
 
     /**

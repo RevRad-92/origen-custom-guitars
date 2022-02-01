@@ -30,14 +30,12 @@ class OrdenController extends Controller
     public function create()
     {
         $pagos = Pago::all();
-        $modelos = Modelo::all();
-        $maderas = Madera::all();
+        // $modelos = Modelo::all();
+        // $maderas = Madera::all();
 
         return view('generarOrden', 
                     [ 
-                        'pagos'     => $pagos,
-                        'modelos'   => $modelos,
-                        'maderas'   => $maderas
+                        'pagos'     => $pagos
                     ]);
     }
 
@@ -62,10 +60,14 @@ class OrdenController extends Controller
         $orden->idCliente = $request->idCliente;
         $orden->ordFecha = $date;
         $orden->idEstado = $request->idEstado;
+        // $orden->idOrden = $idOrden = $request->idOrden;
         
-        $orden->save();
+        $orden->save();  // no deberia guarda aca la orden
+        $idOrden = $orden->idOrden;
 
-        return redirect('adminVentas')->with([ 'mensaje' => 'Orden de compra generada correctamente']);
+        return redirect('crearDetalleCuerpo')->with([ 'mensaje' => 'Generando orden de compra...#' . $idOrden, 'idOrden' => $idOrden]);
+        
+    
     }
 
     /**
