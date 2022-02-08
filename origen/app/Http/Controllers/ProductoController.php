@@ -51,12 +51,17 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         $this->validarForm($request);
+        return $this->verificarRegistro($request);       
+
+    }
+
+    private function verificarRegistro (Request $request)
+    {
         $check = Producto::where('idCategoria', '=', $request->idCategoria)
                     ->where('idModelo', '=', $request->idModelo)
                     ->where('idMadera', '=', $request->idMadera)
                     ->first();
-       
-        // reescribir como funcion:            
+
         if ($check == null ) {
             
             $Producto = new Producto();
@@ -79,13 +84,6 @@ class ProductoController extends Controller
                             'alert' => 'danger' 
                         ]);
         }
-
-
-        // if ($check->idCategoria == $request->idCategoria && $check->idModelo == $request->idModelo && $check->idMadera == $request->idMadera) {
-        //     dd($check);
-        // }
-
-        
     }
 
     /**

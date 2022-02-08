@@ -6,7 +6,7 @@
     </x-slot>
 
     @if ( session('mensaje') )
-            <div class="alert alert-{{ session('alert') ?? success }} max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="alert alert-{{ session('alert') ?? 'success' }} max-w-7xl mx-auto sm:px-6 lg:px-8">
                 {{ session('mensaje') }}
             </div>
     @endif
