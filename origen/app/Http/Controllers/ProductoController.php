@@ -51,9 +51,34 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         $this->validarForm($request);
-        return $this->verificarRegistro($request);       
+        
+        $Producto = new Producto();
 
+        if ($this->verificarRegistro($request)) {  
+
+            $Producto->idCategoria = $request->idCategoria;
+            $Producto->idModelo = $request->idModelo;
+            $Producto->idMadera = $request->idMadera;
+            $Producto->prdStock = $request->prdStock;
+            $Producto->prdPrecio = $request->prdPrecio;
+            $Producto->prdDetalles = $request->prdDetalles;
+        
+            $Producto->save();
+        
+            return redirect('adminProductos')
+                            ->with([ 'mensaje' => 'Producto agregado correctamente' ]);
+
+        } else {
+
+            return redirect('adminProductos')
+                        ->with([
+                            'mensaje' => 'El producto que intentas agregar ya existe',
+                            'alert' => 'danger' 
+                        ]);
+
+            }
     }
+    
 
     private function verificarRegistro (Request $request)
     {
@@ -63,26 +88,9 @@ class ProductoController extends Controller
                     ->first();
 
         if ($check == null ) {
-            
-            $Producto = new Producto();
-    
-            $Producto->idCategoria = $request->idCategoria;
-            $Producto->idModelo = $request->idModelo;
-            $Producto->idMadera = $request->idMadera;
-            $Producto->prdStock = $request->prdStock;
-            $Producto->prdPrecio = $request->prdPrecio;
-            $Producto->prdDetalles = $request->prdDetalles;
-    
-            $Producto->save();
-    
-            return redirect('adminProductos')
-                        ->with([ 'mensaje' => 'Producto agregado correctamente' ]);
+            return true;
         } else {
-            return redirect('adminProductos')
-                        ->with([
-                            'mensaje' => 'El producto que intentas agregar ya existe',
-                            'alert' => 'danger' 
-                        ]);
+            return false;
         }
     }
 
