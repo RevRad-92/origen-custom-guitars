@@ -48,11 +48,14 @@ class OrdenesdetalleController extends Controller
     {
         $detalleCuerpo = new Ordenesdetalle();
 
+        // CONSULTAR STOCK, RESTAR y GUARDAR ID de producto
+        // SELECT idProducto FROM `productos` WHERE idMadera = 3 and idModelo = 3
+        // $productos = Producto::firstWhere($request->id);
 
         // $detalleCuerpo->idModelo = $request->idModelo;
         // $detalleCuerpo->idMadera = $request->idMadera;
 
-        // CONSULTAR STOCK, RESTAR y GUARDAR ID de producto
+        
 
         $detalleCuerpo->save();
 

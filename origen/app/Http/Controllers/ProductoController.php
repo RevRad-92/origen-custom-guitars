@@ -51,20 +51,40 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         $this->validarForm($request);
+        $check = Producto::where('idCategoria', '=', $request->idCategoria)
+                    ->where('idModelo', '=', $request->idModelo)
+                    ->where('idMadera', '=', $request->idMadera)
+                    ->first();
+       
+        // reescribir como funcion:            
+        if ($check == null ) {
+            
+            $Producto = new Producto();
+    
+            $Producto->idCategoria = $request->idCategoria;
+            $Producto->idModelo = $request->idModelo;
+            $Producto->idMadera = $request->idMadera;
+            $Producto->prdStock = $request->prdStock;
+            $Producto->prdPrecio = $request->prdPrecio;
+            $Producto->prdDetalles = $request->prdDetalles;
+    
+            $Producto->save();
+    
+            return redirect('adminProductos')
+                        ->with([ 'mensaje' => 'Producto agregado correctamente' ]);
+        } else {
+            return redirect('adminProductos')
+                        ->with([
+                            'mensaje' => 'El producto que intentas agregar ya existe',
+                            'alert' => 'danger' 
+                        ]);
+        }
 
-        $Producto = new Producto();
 
-        $Producto->idCategoria = $request->idCategoria;
-        $Producto->idModelo = $request->idModelo;
-        $Producto->idMadera = $request->idMadera;
-        $Producto->prdStock = $request->prdStock;
-        $Producto->prdPrecio = $request->prdPrecio;
-        $Producto->prdDetalles = $request->prdDetalles;
+        // if ($check->idCategoria == $request->idCategoria && $check->idModelo == $request->idModelo && $check->idMadera == $request->idMadera) {
+        //     dd($check);
+        // }
 
-        $Producto->save();
-
-        return redirect('adminProductos')
-                    ->with([ 'mensaje' => 'Producto agregado correctamente' ]);
         
     }
 
