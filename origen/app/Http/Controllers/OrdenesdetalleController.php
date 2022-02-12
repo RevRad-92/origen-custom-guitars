@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ordenesdetalle;
 use App\Models\Modelo;
 use App\Models\Madera;
+use App\Models\Producto;
 use App\Models\Orden;
 use Illuminate\Http\Request;
 
@@ -46,20 +47,50 @@ class OrdenesdetalleController extends Controller
      */
     public function store(Request $request)
     {
+        
         $detalleCuerpo = new Ordenesdetalle();
-
-        // CONSULTAR STOCK, RESTAR y GUARDAR ID de producto
-        // SELECT idProducto FROM `productos` WHERE idMadera = 3 and idModelo = 3
-        // $productos = Producto::firstWhere($request->id);
-
-        // $detalleCuerpo->idModelo = $request->idModelo;
-        // $detalleCuerpo->idMadera = $request->idMadera;
-
+        $detalleCuerpo->idOrden = $request->idOrden;
         
 
-        $detalleCuerpo->save();
+        if ($this->verificarStock($request)) {
+            //modificar stock
+            $producto = $this->verificarStock($request);
+            $producto->prdStock = ($producto->prdStock) - 1 ;
+            $producto->save();
+            
+        } else {
+            dd($this->verificarStock($request));
+            // crear producto con stock 0 
+            $producto = new Producto();
 
+            $producto->idModelo = $request->idModelo;
+            $producto->idMadera = $request->idMadera;
+            $producto->prdStock = 0;
+            
+        }
+
+        $detalleCuerpo->idProducto = $producto->idProducto;
+        $detalleCuerpo->idEstado = 1; // los registros de estados no lo modifica el usuario.
+        $detalleCuerpo->save();
+        
         return redirect('adminVentas')->with(['mensaje' => 'detalle creado ok']);
+
+    }
+
+
+    private function verificarStock (Request $request)
+    {
+        $check = Producto::where('idCategoria', '=', $request->idCategoria)
+                    ->where('idModelo', '=', $request->idModelo)
+                    ->where('idMadera', '=', $request->idMadera)
+                    ->first();
+        
+        if ($check == null ) {
+            return false;
+        } else {
+            
+            return $check;
+        }
     }
 
     /**

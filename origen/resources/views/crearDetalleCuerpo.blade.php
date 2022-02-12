@@ -29,6 +29,9 @@
                         
                         
                         <input type="hidden" name="idOrden" value="{{ session('idOrden') }}">
+
+                        {{-- HARDCODEADO --}}
+                        <input type="hidden" name="idCategoria" value="1">
                         
                         <br>
                         Seleccionar modelo: 

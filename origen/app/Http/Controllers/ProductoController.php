@@ -144,21 +144,44 @@ class ProductoController extends Controller
 
         // obtener producto
         $Producto = Producto::find($request->idProducto);
-        
-        // modificar atributos
-        $Producto->idCategoria = $request->idCategoria;
-        $Producto->idModelo = $request->idModelo;
-        $Producto->idMadera = $request->idMadera;
-        $Producto->prdStock = $request->prdStock;
-        $Producto->prdPrecio = $request->prdPrecio;
-        $Producto->prdDetalles = $request->prdDetalles;
 
-        // guardar
-        $Producto->save();
+        // validar cambios
+        if ($this->verificarRegistro($request)) {  
+
+            $Producto->idCategoria = $request->idCategoria;
+            $Producto->idModelo = $request->idModelo;
+            $Producto->idMadera = $request->idMadera;
+            $Producto->prdStock = $request->prdStock;
+            $Producto->prdPrecio = $request->prdPrecio;
+            $Producto->prdDetalles = $request->prdDetalles;
         
-        //redireccionar
-        return redirect('/adminProductos')
-                        ->with(['mensaje' => 'Producto modificado con éxito']);
+            $Producto->save();
+        
+            return redirect('adminProductos')
+                            ->with([ 'mensaje' => 'Producto modificado con éxito' ]);
+
+        } elseif ($Producto->prdStock !== $request->prdStock
+                    || $Producto->prdPrecio !== $request->prdPrecio
+                    || $Producto->prdDetalles !== $request->prdDetalles ) {
+            
+            $Producto->prdStock = $request->prdStock;
+            $Producto->prdPrecio = $request->prdPrecio;
+            $Producto->prdDetalles = $request->prdDetalles;
+            $Producto->save();
+
+            return redirect('adminProductos')
+                        ->with([ 'mensaje' => 'Características del producto modificadas con éxito' ]);
+
+        } else {
+
+            return redirect('adminProductos')
+                        ->with([
+                            'mensaje' => 'El producto que intentas agregar ya existe',
+                            'alert' => 'danger' 
+                        ]);
+
+            }
+
     }
 
     /**
