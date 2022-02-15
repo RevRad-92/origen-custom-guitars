@@ -34,7 +34,7 @@
                         <tbody>    
                     @foreach($ordenes as $orden)      
                     
-                          <tr>
+                        <tr>
                             <td>{{ $orden->idOrden}}</td>
                             <td>{{ $orden->getCliente->cliNombre . ' ' . $orden->getCliente->cliApellido }}</td>
                             <td>{{ $orden->getFormaPago->formaPago}}</td>
@@ -42,16 +42,17 @@
                             <td>{{ date('d-m-Y H:i:s', strtotime($orden->ordFecha)) }}</td>  
                             <td>{{ $orden->ordComentarios}}</td>
                             <td>
-                                {{-- <a href="/modificarCliente/{{ $cliente->idCliente }}" class="btn btn-outline-secondary">
-                                    Modificar
-                                </a> --}}
-                            </td>
-                            <td>
                                 <a href="/eliminarOrden/{{ $orden->idOrden }}" class="btn btn-outline-secondary">
                                     Eliminar
                                 </a>
                             </td>
-                          </tr>
+                            <td>
+                                <a href="/orden/{{ $orden->idOrden }}" class="btn btn-outline-secondary">
+                                    Ver
+                                </a>
+                            </td>
+                        </tr>
+                        
                     @endforeach
                         </tbody>
                     </table>

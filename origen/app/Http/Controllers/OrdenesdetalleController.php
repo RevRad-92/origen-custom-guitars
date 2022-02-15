@@ -16,9 +16,19 @@ class OrdenesdetalleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($idOrden)
     {
-        //
+        $orden = Orden::find($idOrden);
+
+        $detalles = Ordenesdetalle::where('idOrden', '=', $idOrden)->with(['getCategoria', 'getProducto', 'getModelo', 'getMadera', 'getEstado'])->paginate(10);
+        
+        
+
+        return view('orden', [ 
+                        'orden' => $orden->idOrden, 
+                        'detalles' => $detalles, 
+                        
+                    ]);
     }
 
     /**

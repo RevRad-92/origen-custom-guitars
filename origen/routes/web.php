@@ -104,5 +104,7 @@ Route::get('/generarOrden', [OrdenController::class, 'create'])->middleware(['au
 Route::post('/generarOrden', [OrdenController::class, 'store'])->middleware(['auth'])->name('generarOrden');
 
 
+Route::get('/orden/{id}', [OrdenesdetalleController::class, 'index'])->middleware(['auth'])->name('orden');
+
 Route::get('/crearDetalleCuerpo', [OrdenesdetalleController::class, 'create'])->middleware(['auth'])->name('crearDetalleCuerpo');
 Route::post('/crearDetalleCuerpo', [OrdenesdetalleController::class, 'store'])->middleware(['auth'])->name('crearDetalleCuerpo');
