@@ -7,8 +7,10 @@ use App\Http\Controllers\ModeloController;
 use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\OrdenesdetalleController;
+use App\Models\Estado;
 use App\Models\Madera;
 use App\Models\Ordenesdetalle;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -105,6 +107,8 @@ Route::post('/generarOrden', [OrdenController::class, 'store'])->middleware(['au
 
 
 Route::get('/orden/{id}', [OrdenesdetalleController::class, 'index'])->middleware(['auth'])->name('orden');
+Route::post('/orden/{id}', [Estado::class, 'actualizarEstado'])->Middleware(['auth'])->name('orden');
+
 
 Route::get('/crearDetalleCuerpo', [OrdenesdetalleController::class, 'create'])->middleware(['auth'])->name('crearDetalleCuerpo');
 Route::post('/crearDetalleCuerpo', [OrdenesdetalleController::class, 'store'])->middleware(['auth'])->name('crearDetalleCuerpo');

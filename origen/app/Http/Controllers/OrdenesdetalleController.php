@@ -7,6 +7,7 @@ use App\Models\Modelo;
 use App\Models\Madera;
 use App\Models\Producto;
 use App\Models\Orden;
+use App\Models\Estado;
 use Illuminate\Http\Request;
 
 class OrdenesdetalleController extends Controller
@@ -21,12 +22,14 @@ class OrdenesdetalleController extends Controller
         $orden = Orden::find($idOrden);
 
         $detalles = Ordenesdetalle::where('idOrden', '=', $idOrden)->with(['getCategoria', 'getProducto', 'getModelo', 'getMadera', 'getEstado'])->paginate(10);
+        $estados = Estado::all();
         
         
 
         return view('orden', [ 
                         'orden' => $orden->idOrden, 
-                        'detalles' => $detalles, 
+                        'detalles' => $detalles,
+                        'estados' => $estados 
                         
                     ]);
     }

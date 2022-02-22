@@ -26,10 +26,27 @@
                             <td>{{ $detalle->getProducto->getCategoria->catNombre }}</td>
                             <td>{{ $detalle->getProducto->getModelo->modNombre }}</td>
                             <td>{{ $detalle->getProducto->getMadera->madNombre }}</td>
-                            <td>{{ $detalle->getEstado->estNombre }}</td>
+                            <td>
+                            <form action="/orden/{{ $detalle->idOrden}}" method="post" class="form-control">
+                                @csrf
+                                <select name="idEstado" class="form-control desplegar">
+                        @foreach ($estados as $estado)  
+                                    <option {{ $estado->estNombre == $detalle->getEstado->estNombre ? 'selected' : '' }}
+                                        value="{{ $estado->idEstado == $detalle->getEstado->idEstado ? $detalle->getEstado->idEstado : $estado->idEstado }}">
+                                        {{ $estado->estNombre == $detalle->getEstado->estNombre ? $detalle->getEstado->estNombre : $estado->estNombre }}
+                                    </option>
+                        
+                            {{-- {{ $detalle->getEstado->estNombre }} --}}
+                        @endforeach
+                                    
                             
+                                </select>
+                            </td>
+                            <td>
+                                <button class="btn btn-dark mb-3">Confirmar estado</button>
+                            </form>
+                            </td>
                             
-                            <td></td>
                             {{-- <td> 
                                 <a href="/modificarCliente/{{ $cliente->idCliente }}" class="btn btn-outline-secondary">
                                     Modificar
